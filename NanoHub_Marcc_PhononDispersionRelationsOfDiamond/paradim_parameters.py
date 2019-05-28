@@ -167,17 +167,17 @@ PARADIM_UI['s1']['status'].disabled = True
 #PARADIM_UI['s1']['button_status'].layout = Layout(width='99%')
 
 PARADIM_UI['s1']['l1'] = VBox([
-                               PARADIM_UI['s1']['ecutwfc'].w,
-                               PARADIM_UI['s1']['ntyp'].w,
-                               PARADIM_UI['s1']['nat'].w,
-                               PARADIM_UI['s1']['celldm'].w,
+                               PARADIM_UI['s1']['ecutwfc'].dd,
+                               PARADIM_UI['s1']['ntyp'].dd,
+                               PARADIM_UI['s1']['nat'].dd,
+                               PARADIM_UI['s1']['celldm'].dd,
                                PARADIM_UI['s1']['button'].w,
-                               PARADIM_UI['s1']['job_id'].w,
-                               PARADIM_UI['s1']['status'].w,                               
+                               PARADIM_UI['s1']['job_id'].dd,
+                               PARADIM_UI['s1']['status'].dd,                               
                               ])
 PARADIM_UI['s1']['l2'] = VBox([
-                               PARADIM_UI['s1']['input'].w,
-                               PARADIM_UI['s1']['commands'].w,                               
+                               PARADIM_UI['s1']['input'].dd,
+                               PARADIM_UI['s1']['commands'].dd,                               
                               ])
 PARADIM_UI['s1']['bs'] = HBox([PARADIM_UI['s1']['l1'],PARADIM_UI['s1']['l2']])
 PARADIM_UI['s1']['bs'].w = Box([PARADIM_UI['s1']['bs']])
@@ -251,15 +251,15 @@ PARADIM_UI['s2']['status'].disabled = True
 
 
 PARADIM_UI['s2']['l1'] = VBox([
-                               PARADIM_UI['s2']['amass'].w,
-                               PARADIM_UI['s2']['nq'].w,
+                               PARADIM_UI['s2']['amass'].dd,
+                               PARADIM_UI['s2']['nq'].dd,
                                PARADIM_UI['s2']['button'].w,
-                               PARADIM_UI['s2']['job_id'].w,
-                               PARADIM_UI['s2']['status'].w,                               
+                               PARADIM_UI['s2']['job_id'].dd,
+                               PARADIM_UI['s2']['status'].dd,                               
                               ])
 PARADIM_UI['s2']['l2'] = VBox([
-                               PARADIM_UI['s2']['input'].w,
-                               PARADIM_UI['s2']['commands'].w,                               
+                               PARADIM_UI['s2']['input'].dd,
+                               PARADIM_UI['s2']['commands'].dd,                               
                               ])
 PARADIM_UI['s2']['bs'] = HBox([PARADIM_UI['s2']['l1'],PARADIM_UI['s2']['l2']])
 PARADIM_UI['s2']['bs'].w = Box([PARADIM_UI['s2']['bs']])
@@ -330,14 +330,14 @@ PARADIM_UI['s3']['status'] = ui.String(description='job status',name='job status
 PARADIM_UI['s3']['status'].disabled = True
 
 PARADIM_UI['s3']['l1'] = VBox([
-                               PARADIM_UI['s3']['flfrc'].w,
+                               PARADIM_UI['s3']['flfrc'].dd,
                                PARADIM_UI['s3']['button'].w,
-                               PARADIM_UI['s3']['status'].w
+                               PARADIM_UI['s3']['status'].dd
                               
                               ])
 PARADIM_UI['s3']['l2'] = VBox([
-                               PARADIM_UI['s3']['input'].w,
-                               PARADIM_UI['s3']['output'].w,
+                               PARADIM_UI['s3']['input'].dd,
+                               PARADIM_UI['s3']['output'].dd,
                               ])
 PARADIM_UI['s3']['bs'] = HBox([PARADIM_UI['s3']['l1'],PARADIM_UI['s3']['l2']])
 PARADIM_UI['s3']['bs'].w = Box([PARADIM_UI['s3']['bs']])
@@ -434,15 +434,15 @@ PARADIM_UI['s4']['status'] = ui.String(description='job status',name='job status
 PARADIM_UI['s4']['status'].disabled = True
 
 PARADIM_UI['s4']['l1'] = VBox([
-                               PARADIM_UI['s4']['flfrq'].w,
-                               PARADIM_UI['s4']['qpoints'].w,
+                               PARADIM_UI['s4']['flfrq'].dd,
+                               PARADIM_UI['s4']['qpoints'].dd,
                                PARADIM_UI['s4']['button'].w,
-                               PARADIM_UI['s4']['status'].w
+                               PARADIM_UI['s4']['status'].dd
                               
                               ])
 PARADIM_UI['s4']['l2'] = VBox([
-                               PARADIM_UI['s4']['input'].w,
-                               PARADIM_UI['s4']['output'].w,
+                               PARADIM_UI['s4']['input'].dd,
+                               PARADIM_UI['s4']['output'].dd,
                               ])
 PARADIM_UI['s4']['bs'] = HBox([PARADIM_UI['s4']['l1'],PARADIM_UI['s4']['l2']])
 PARADIM_UI['s4']['bs'].w = Box([PARADIM_UI['s4']['bs']])
@@ -493,7 +493,7 @@ PARADIM_UI['s5']['output'] = Output()
 PARADIM_UI['s5']['output'].layout = Layout(width='99%')
 
 PARADIM_UI['s5']['l1'] = VBox([
-                               PARADIM_UI['s5']['input'].w,
+                               PARADIM_UI['s5']['input'].dd,
                                PARADIM_UI['s5']['button'].w,
                               ])
 PARADIM_UI['s5']['l2'] = VBox([
