@@ -1,0 +1,28 @@
+&control
+calculation = 'scf',
+prefix = 'La2O3',
+pseudo_dir = './',
+outdir = './'
+/
+&system
+ibrav = 1,
+a     =  4.57240e+00,
+nat   = 5,
+ntyp  = 2,
+ecutwfc = 30.0,
+/
+&electrons
+conv_thr = 1.0d-6
+/
+ATOMIC_SPECIES
+La    138.90550  La.pz-spfn-rrkjus_psl.1.0.0.UPF
+O      15.99940  O.pz-n-rrkjus_psl.0.1.UPF
+ATOMIC_POSITIONS {crystal}
+La      0.000000   0.000000   0.000000
+La      0.500000   0.500000   0.500000
+O       0.000000   0.500000   0.500000
+O       0.500000   0.000000   0.500000
+O       0.500000   0.500000   0.000000
+K_POINTS automatic
+2 2 2 1 1 1
+
