@@ -1,4 +1,4 @@
-from ipywidgets import HBox, VBox, Box,  Button, Layout, FloatProgress, Output, Text
+from ipywidgets import HBox, VBox, Box,  Button, Layout, FloatProgress, Output, Text, Output
 import hublib.ui as ui
 import random, string
 from string import Template
@@ -8,8 +8,18 @@ class MyPassword(FormValue):
     def __init__(self, name, value, **kwargs):
         self.dd = Password(value=value)
         FormValue.__init__(self, name, **kwargs)
+
+class Myaction:
+    def __init__(self):
+        self.callback = None
         
-        
+    def on_click(self, on_click):
+        self.callback = on_click
+    
+    def click(self, e):
+        if (self.callback != None):
+            self.callback(e)
+            
 PARADIM = {}
 PARADIM['SERVER'] = 'gateway2.marcc.jhu.edu'    
 PARADIM['TUTORIAL_NAME'] = 'SUMMER_SCHOOL'
@@ -162,6 +172,7 @@ PARADIM_UI['s1']['stderr'].disabled = True
 PARADIM_UI['s1']['button'] = Button(description='Calculate DFT Energy')
 PARADIM_UI['s1']['button'].w = Box([PARADIM_UI['s1']['button']])
 
+
 PARADIM_UI['s1']['job_id'] = Text(placeholder='job ID',value='')
 PARADIM_UI['s1']['job_id'].disabled = True
 PARADIM_UI['s1']['status'] = Text(placeholder='job status',value='')
@@ -211,78 +222,39 @@ UpdateStep1({'type':'change','name':'value','new':'new'})
 ##################################################
 
 PARADIM_UI['s2'] = {}
-PARADIM_UI['s2']['amass'] = ui.String(name='amass',description='amass',value='12.0107')
-PARADIM_UI['s2']['nq'] = ui.String(name='nq(1-3)',description='nq(1-3)',value='2')
 
-PARADIM_UI['s2']['input'] = ui.Text( description="inputdeck",  name="inputdeck", value='''''')
-PARADIM_UI['s2']['input'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s2']['input'].disabled = True
-
-PARADIM_UI['s2']['commands'] = ui.Text( description="commands",  name="commands", value='''''')
-PARADIM_UI['s2']['commands'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s2']['commands'].disabled = True
-
-PARADIM_UI['s2']['stdin'] = ui.Text( description="stdin",name="stdin", value='''''')
-PARADIM_UI['s2']['stdin'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s2']['stdin'].disabled = True
-
-PARADIM_UI['s2']['stdout'] = ui.Text( description="stdout", name="stdout", value='''''')
-PARADIM_UI['s2']['stdout'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s2']['stdout'].disabled = True
-
-PARADIM_UI['s2']['stderr'] = ui.Text( description="stderr", name="stderr", value='''''')
-PARADIM_UI['s2']['stderr'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s2']['stderr'].disabled = True
-
-PARADIM_UI['s2']['button'] = Button(description='Calculate Potential Frequencies')
+PARADIM_UI['s2']['button'] = Button(description='Calculate Formation Energy')
 PARADIM_UI['s2']['button'].layout = Layout(width='99%')
 PARADIM_UI['s2']['button'].w = Box([PARADIM_UI['s2']['button']])
-
-PARADIM_UI['s2']['job_id'] = ui.String(description='job ID',name='job ID',value='')
-PARADIM_UI['s2']['job_id'].disabled = True
-PARADIM_UI['s2']['status'] = ui.String(description='job status',name='job status',value='')
-PARADIM_UI['s2']['status'].disabled = True
-
+PARADIM_UI['s2']['action'] = Myaction()
+PARADIM_UI['s2']['LaNiO3'] = ui.Number(description="LaNiO3", name="LaNiO3", value = -1.35, units="Ha", step=0.1)
+PARADIM_UI['s2']['La2O3'] = ui.Number(description="La2O3", name="La2O3", value = -1.485, units="Ha", step=0.1)
+PARADIM_UI['s2']['NiO'] = ui.Number(description="NiO", name="NiO", value = -0.475, units="Ha", step=0.1)
+PARADIM_UI['s2']['O2'] = ui.Number(description="O2", name="O2", value = -0.23, units="Ha", step=0.1)
+PARADIM_UI['s2']['La3Ni2O7'] = ui.Number(description="La3Ni2O7", name="La3Ni2O7", value = -4, units="Ha", step=0.1)
+PARADIM_UI['s2']['La4Ni3O10'] = ui.Number(description="La4Ni3O10", name="La4Ni3O10", value = -2.65, units="Ha", step=0.1)
+PARADIM_UI['s2']['La2NiO4'] = ui.Number(description="La2NiO4", name="La2NiO4", value = -2, units="Ha", step=0.1)
+PARADIM_UI['s2']['energy'] = ui.Number(description="Binding energy", name="Binding energy", value = 0, disabled=True, units="Ha")
+                 
+    
+                 
+                 
+PARADIM_UI['s2']['button'].on_click(lambda e: PARADIM_UI['s2']['action'].click( e ) )
 
 PARADIM_UI['s2']['l1'] = VBox([
-                               PARADIM_UI['s2']['amass'].dd,
-                               PARADIM_UI['s2']['nq'].dd,
-                               PARADIM_UI['s2']['button'].w,
-                               PARADIM_UI['s2']['job_id'].dd,
-                               PARADIM_UI['s2']['status'].dd,                               
+                                PARADIM_UI['s2']['LaNiO3'],
+                                PARADIM_UI['s2']['La2O3'],
+                                PARADIM_UI['s2']['NiO'],
+                                PARADIM_UI['s2']['O2'],
+                                PARADIM_UI['s2']['La3Ni2O7'],
+                                PARADIM_UI['s2']['La4Ni3O10'],
+                                PARADIM_UI['s2']['La2NiO4'],
+                                PARADIM_UI['s2']['button'].w,
+                                PARADIM_UI['s2']['energy'],
                               ])
-PARADIM_UI['s2']['l2'] = VBox([
-                               PARADIM_UI['s2']['input'].dd,
-                               PARADIM_UI['s2']['commands'].dd,                               
-                              ])
-PARADIM_UI['s2']['bs'] = HBox([PARADIM_UI['s2']['l1'],PARADIM_UI['s2']['l2']])
-PARADIM_UI['s2']['bs'].w = Box([PARADIM_UI['s2']['bs']])
-PARADIM_UI['s2']['l2'].layout = Layout(width='100%', border='1px')
-PARADIM_UI['s2']['bs'].layout = Layout(width='100%', border='1px')
+PARADIM_UI['s2']['l1'].layout = Layout(width='100%', border='1px')
 
-s2_tab0 = ui.Form([PARADIM_UI['s2']['bs']], name = 'Crystal Inputs')
-s2_tab1 = ui.Form([PARADIM_UI['s2']['stdin']], name = 'stdin')
-s2_tab2 = ui.Form([PARADIM_UI['s2']['stdout']], name = 'stdout')
-s2_tab3 = ui.Form([PARADIM_UI['s2']['stderr']], name = 'stderr')
-
-
-def UpdateStep2( event ):
-    global PARADIM_UI, PARADIM
-    change = {  
-                'prefix':'diamond',
-                'amass' : PARADIM_UI['s2']['amass'].value, 
-                'fildyn': 'dyn',
-                'nq1': PARADIM_UI['s2']['nq'].value,
-                'nq2': PARADIM_UI['s2']['nq'].value,
-                'nq3': PARADIM_UI['s2']['nq'].value
-    }    
-    if event['type'] == 'change' and event['name'] == 'value' and event['new']:
-        PARADIM_UI['s2']['input'].value = PARADIM['PH_TEMPLATE'].safe_substitute(change)
-    
-PARADIM_UI['s2']['amass'].dd.observe(UpdateStep2)
-PARADIM_UI['s2']['nq'].dd.observe(UpdateStep2)
-PARADIM_UI['s2']['display'] = ui.Tab([s2_tab0, s2_tab1, s2_tab2, s2_tab3])
-UpdateStep2({'type':'change','name':'value','new':'new'})
+PARADIM_UI['s2']['display'] = PARADIM_UI['s2']['l1']
 
 
 ##################################################
@@ -290,74 +262,20 @@ UpdateStep2({'type':'change','name':'value','new':'new'})
 ##################################################
 
 PARADIM_UI['s3'] = {}
-PARADIM_UI['s3']['flfrc'] = ui.String(name='flfrc',description='flfrc',value='diam.fc')
 
-PARADIM_UI['s3']['input'] = ui.Text( description="inputdeck",  name="inputdeck", value='''''')
-PARADIM_UI['s3']['input'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s3']['input'].disabled = True
-
-PARADIM_UI['s3']['output'] = ui.Text( description="output",  name="output", value='''''')
-PARADIM_UI['s3']['output'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s3']['output'].disabled = True
-
-PARADIM_UI['s3']['commands'] = ui.Text( description="commands",  name="commands", value='''''')
-PARADIM_UI['s3']['commands'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s3']['commands'].disabled = True
-
-PARADIM_UI['s3']['stdin'] = ui.Text( description="stdin",name="stdin", value='''''')
-PARADIM_UI['s3']['stdin'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s3']['stdin'].disabled = True
-
-PARADIM_UI['s3']['stdout'] = ui.Text( description="stdout", name="stdout", value='''''')
-PARADIM_UI['s3']['stdout'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s3']['stdout'].disabled = True
-
-PARADIM_UI['s3']['stderr'] = ui.Text( description="stderr", name="stderr", value='''''')
-PARADIM_UI['s3']['stderr'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s3']['stderr'].disabled = True
-
-PARADIM_UI['s3']['button'] = Button(description='Calculate Interatomic Force')
+PARADIM_UI['s3']['button'] = Button(description='Calculate Thermodynamics')
 PARADIM_UI['s3']['button'].layout = Layout(width='99%')
 PARADIM_UI['s3']['button'].w = Box([PARADIM_UI['s3']['button']])
-
-PARADIM_UI['s3']['status'] = ui.String(description='job status',name='job status',value='')
-PARADIM_UI['s3']['status'].disabled = True
+PARADIM_UI['s3']['action'] = Myaction()
+PARADIM_UI['s3']['button'].on_click(lambda e: PARADIM_UI['s3']['action'].click( e ) )
+PARADIM_UI['s3']['output'] = Output()
 
 PARADIM_UI['s3']['l1'] = VBox([
-                               PARADIM_UI['s3']['flfrc'].dd,
                                PARADIM_UI['s3']['button'].w,
-                               PARADIM_UI['s3']['status'].dd
-                              
                               ])
-PARADIM_UI['s3']['l2'] = VBox([
-                               PARADIM_UI['s3']['input'].dd,
-                               PARADIM_UI['s3']['output'].dd,
-                              ])
-PARADIM_UI['s3']['bs'] = HBox([PARADIM_UI['s3']['l1'],PARADIM_UI['s3']['l2']])
-PARADIM_UI['s3']['bs'].w = Box([PARADIM_UI['s3']['bs']])
-PARADIM_UI['s3']['l2'].layout = Layout(width='100%', border='1px')
-PARADIM_UI['s3']['bs'].layout = Layout(width='100%', border='1px')
+PARADIM_UI['s3']['l1'].layout = Layout(width='100%', border='1px')
 
-s3_tab0 = ui.Form([PARADIM_UI['s3']['bs']], name = 'Crystal Inputs')
-s3_tab1 = ui.Form([PARADIM_UI['s3']['stdin']], name = 'stdin')
-s3_tab2 = ui.Form([PARADIM_UI['s3']['stdout']], name = 'stdout')
-s3_tab3 = ui.Form([PARADIM_UI['s3']['stderr']], name = 'stderr')
-
-
-def UpdateStep3( event ):
-    global PARADIM_UI, PARADIM
-    change = {  
-                'fildyn' : 'dyn',
-                'flfrc' : PARADIM_UI['s3']['flfrc'].value,
-             }
-  
-    if event['type'] == 'change' and event['name'] == 'value' and event['new']:
-        PARADIM_UI['s3']['input'].value = PARADIM['Q2R_TEMPLATE'].safe_substitute(change)
-    
-PARADIM_UI['s3']['flfrc'].dd.observe(UpdateStep3)
-
-PARADIM_UI['s3']['display'] = ui.Tab([s3_tab0, s3_tab1, s3_tab2, s3_tab3])
-UpdateStep3({'type':'change','name':'value','new':'new'})
+PARADIM_UI['s3']['display'] = PARADIM_UI['s3']['l1']
 
 
 
@@ -366,106 +284,20 @@ UpdateStep3({'type':'change','name':'value','new':'new'})
 ##################################################
 
 PARADIM_UI['s4'] = {}
-PARADIM_UI['s4']['flfrq'] = ui.String(name='flfrq',description='flfrq',value='diam.freq')
-PARADIM_UI['s4']['qpoints'] = ui.Text(
-    description="qpoints",
-    name="qpoints",
-    value='''21
- 0.500 0.500 0.500
- 0.450 0.450 0.450
- 0.400 0.400 0.400
- 0.350 0.350 0.350
- 0.300 0.300 0.300
- 0.250 0.250 0.250
- 0.200 0.200 0.200
- 0.150 0.150 0.150
- 0.100 0.100 0.100
- 0.050 0.050 0.050
- 0.000 0.000 0.000
- 0.100 0.000 0.000
- 0.200 0.000 0.000
- 0.300 0.000 0.000
- 0.400 0.000 0.000
- 0.500 0.000 0.000
- 0.600 0.000 0.000
- 0.700 0.000 0.000
- 0.800 0.000 0.000
- 0.900 0.000 0.000
- 1.000 0.000 0.000
-'''    
-)
-PARADIM_UI['s4']['qpoints'].dd.layout = Layout(height='120px')
 
-PARADIM_UI['s4']['input'] = ui.Text( description="inputdeck",  name="inputdeck", value='''''')
-PARADIM_UI['s4']['input'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s4']['input'].disabled = True
-
-PARADIM_UI['s4']['output'] = ui.Text( description="output",  name="output", value='''''')
-PARADIM_UI['s4']['output'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s4']['output'].disabled = True
-
-PARADIM_UI['s4']['commands'] = ui.Text( description="commands",  name="commands", value='''''')
-PARADIM_UI['s4']['commands'].dd.layout = Layout(width='90%', height='150px')
-PARADIM_UI['s4']['commands'].disabled = True
-
-PARADIM_UI['s4']['stdin'] = ui.Text( description="stdin",name="stdin", value='''''')
-PARADIM_UI['s4']['stdin'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s4']['stdin'].disabled = True
-
-PARADIM_UI['s4']['stdout'] = ui.Text( description="stdout", name="stdout", value='''''')
-PARADIM_UI['s4']['stdout'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s4']['stdout'].disabled = True
-
-PARADIM_UI['s4']['stderr'] = ui.Text( description="stderr", name="stderr", value='''''')
-PARADIM_UI['s4']['stderr'].dd.layout = Layout(width='100%', height='300px')
-PARADIM_UI['s4']['stderr'].disabled = True
-
-PARADIM_UI['s4']['button'] = Button(description='Calculate Interatomic Force')
+PARADIM_UI['s4']['button'] = Button(description='Calculate Oxygen Pressure')
 PARADIM_UI['s4']['button'].layout = Layout(width='99%')
 PARADIM_UI['s4']['button'].w = Box([PARADIM_UI['s4']['button']])
-
-PARADIM_UI['s4']['status'] = ui.String(description='job status',name='job status',value='')
-PARADIM_UI['s4']['status'].disabled = True
+PARADIM_UI['s4']['action'] = Myaction()
+PARADIM_UI['s4']['button'].on_click(lambda e: PARADIM_UI['s4']['action'].click( e ) )
+PARADIM_UI['s4']['output'] = Output()
 
 PARADIM_UI['s4']['l1'] = VBox([
-                               PARADIM_UI['s4']['flfrq'].dd,
-                               PARADIM_UI['s4']['qpoints'].dd,
                                PARADIM_UI['s4']['button'].w,
-                               PARADIM_UI['s4']['status'].dd
-                              
                               ])
-PARADIM_UI['s4']['l2'] = VBox([
-                               PARADIM_UI['s4']['input'].dd,
-                               PARADIM_UI['s4']['output'].dd,
-                              ])
-PARADIM_UI['s4']['bs'] = HBox([PARADIM_UI['s4']['l1'],PARADIM_UI['s4']['l2']])
-PARADIM_UI['s4']['bs'].w = Box([PARADIM_UI['s4']['bs']])
-PARADIM_UI['s4']['l2'].layout = Layout(width='100%', border='1px')
-PARADIM_UI['s4']['bs'].layout = Layout(width='100%', border='1px')
+PARADIM_UI['s4']['l1'].layout = Layout(width='100%', border='1px')
 
-s4_tab0 = ui.Form([PARADIM_UI['s4']['bs']], name = 'Crystal Inputs')
-s4_tab1 = ui.Form([PARADIM_UI['s4']['stdin']], name = 'stdin')
-s4_tab2 = ui.Form([PARADIM_UI['s4']['stdout']], name = 'stdout')
-s4_tab3 = ui.Form([PARADIM_UI['s4']['stderr']], name = 'stderr')
-
-
-def UpdateStep4( event ):
-    global PARADIM_UI, PARADIM
-    change = {  
-                'fildyn' : 'dyn',
-                'flfrc' : PARADIM_UI['s3']['flfrc'].value,        
-                'flfrq' : PARADIM_UI['s4']['flfrq'].value,
-                'qpoints' : PARADIM_UI['s4']['qpoints'].value,
-             }
-  
-    if event['type'] == 'change' and event['name'] == 'value' and event['new']:
-        PARADIM_UI['s4']['input'].value = PARADIM['MATDYN_TEMPLATE'].safe_substitute(change)
-    
-PARADIM_UI['s4']['flfrq'].dd.observe(UpdateStep4)
-PARADIM_UI['s3']['flfrc'].dd.observe(UpdateStep4)
-
-PARADIM_UI['s4']['display'] = ui.Tab([s4_tab0, s4_tab1, s4_tab2, s4_tab3])
-UpdateStep4({'type':'change','name':'value','new':'new'})
+PARADIM_UI['s4']['display'] = PARADIM_UI['s4']['l1']
 
 
 
