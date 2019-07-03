@@ -1,31 +1,33 @@
 &control
-calculation = 'scf',
-prefix = 'NiO',
-pseudo_dir = './',
-outdir = './'
+ calculation = 'vc-relax',
+ prefix = 'NiO',
+ pseudo_dir = './',
+ outdir = './',
+ nstep = 300,
 /
 &system
-ibrav = 1,
-a     =  4.20430e+00,
-nat   = 8,
-ntyp  = 2,
-ecutwfc = 30.0,
+ a = 4.33499e+00,
+ ibrav = 2,
+ nat = 2,
+ ntyp = 2,
+ ecutwfc = 60.0,
+ occupations = 'smearing',
+ smearing = 'gauss',
+ degauss = 1.00000e-02,
 /
 &electrons
-conv_thr = 1.0d-6
+ conv_thr = 1.0d-8
+/
+
+&IONS
+/
+&CELL
 /
 ATOMIC_SPECIES
-Ni     58.69340  Ni.pz-n-rrkjus_psl.0.1.UPF
-O      15.99940  O.pz-n-rrkjus_psl.0.1.UPF
+ Ni 58.69340 Ni.pz-n-rrkjus_psl.0.1.UPF
+ O 15.99940 O.pz-n-rrkjus_psl.0.1.UPF
 ATOMIC_POSITIONS {crystal}
-Ni      0.000000   0.000000   0.000000
-Ni      0.000000   0.500000   0.500000
-Ni      0.500000   0.000000   0.500000
-Ni      0.500000   0.500000   0.000000
-O       0.000000   0.000000   0.500000
-O       0.500000   0.000000   0.000000
-O       0.000000   0.500000   0.000000
-O       0.500000   0.500000   0.500000
+ Ni 0.000000 0.000000 0.000000
+ O 0.500000 0.500000 0.500000
 K_POINTS automatic
-2 2 2 1 1 1
-
+ 4 4 4 1 1 1

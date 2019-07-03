@@ -1,39 +1,44 @@
 &control
-calculation = 'scf',
+calculation = 'vc-relax',
 prefix = 'La2NiO4',
 pseudo_dir = './',
-outdir = './'
+outdir = './',
+nstep = 300,
 /
 &system
-ibrav = 6,
-a     =  3.92410e+00,
-c     =  1.25204e+01,
-nat   = 14,
-ntyp  = 3,
-ecutwfc = 30.0,
+a = 7.10080e+00,
+b = 7.10080e+00,
+c = 7.10080e+00,
+cosab = 7.25183e-01,
+cosac = -8.62593e-01,
+cosbc = -8.62593e-01,
+ibrav = 14,
+
+nat = 7,
+ntyp = 3,
+ecutwfc = 60.0,
+occupations = 'smearing',
+smearing = 'gauss',
+degauss = 1.00000e-02,
 /
 &electrons
-conv_thr = 1.0d-6
+conv_thr = 1.0d-8
+/
+&IONS
+/
+&CELL
 /
 ATOMIC_SPECIES
-La    138.90550  La.pz-spfn-rrkjus_psl.1.0.0.UPF
-Ni     58.69340  Ni.pz-n-rrkjus_psl.0.1.UPF
-O      15.99940  O.pz-n-rrkjus_psl.0.1.UPF
+La 138.90550 La.pz-spfn-rrkjus_psl.1.0.0.UPF
+Ni 58.69340 Ni.pz-n-rrkjus_psl.0.1.UPF
+O 15.99940 O.pz-n-rrkjus_psl.0.1.UPF
 ATOMIC_POSITIONS {crystal}
-La      0.000000   0.000000   0.363470
-La      0.000000   0.000000   0.636530
-La      0.500000   0.500000   0.863470
-La      0.500000   0.500000   0.136530
-O       0.000000   0.000000   0.178990
-O       0.000000   0.000000   0.821010
-O       0.500000   0.500000   0.678990
-O       0.500000   0.500000   0.321010
-Ni      0.000000   0.000000   0.000000
-Ni      0.500000   0.500000   0.500000
-O       0.000000   0.500000   0.000000
-O       0.500000   0.000000   0.000000
-O       0.500000   0.000000   0.500000
-O       0.000000   0.500000   0.500000
+La 0.637310 0.637310 0.000000
+La 0.362690 0.362690 0.000000
+O 0.819680 0.819680 0.000000
+O 0.180320 0.180320 0.000000
+Ni 0.000000 0.000000 0.000000
+O 0.000002 0.500002 0.500003
+O 0.500002 0.000002 0.500003
 K_POINTS automatic
-2 2 2 1 1 1
-
+4 4 4 1 1 1
