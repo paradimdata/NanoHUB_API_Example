@@ -7,7 +7,7 @@ def GetPbs( template, input_file, command='pw.x' ):
                 'tasks':'12',
                 'mem':'1000MB',
                 'modules':'ml intel intelmpi quantumespresso/6.4.1',
-                'command':'mpiexec -np 12 '+ command +' -npool 4 < ' + input_file + '.in >' + input_file + '.out '}
+                'command':'mpiexec -np 12 '+ command +' -npool 1 < ' + input_file + '.in >' + input_file + '.out '}
     return template.safe_substitute(change)
     
 
