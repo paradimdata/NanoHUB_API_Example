@@ -4,7 +4,7 @@
                 'time':'00:30:00',
                 'partition':'shared', #debug
                 'nodes':'1',
-                'tasks':'12',
+                'tasks':'24',
                 'mem':'1000MB',
                 'modules':'ml intel intelmpi quantumespresso/6.4.1',
                 'command':'mpiexec -np 12 '+ command +' -npool 4 < ' + input_file + '.in >' + input_file + '.out '}
