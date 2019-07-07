@@ -165,7 +165,7 @@ PARADIM_UI['s1']['stderr'] = ui.Text( description="stderr", name="stderr", value
 PARADIM_UI['s1']['stderr'].dd.layout = Layout(width='100%', height='300px')
 PARADIM_UI['s1']['stderr'].disabled = True
 
-PARADIM_UI['s1']['button'] = Button(description='Calculate Diamond Structure')
+PARADIM_UI['s1']['button'] = Button(description='Calculate Structure')
 PARADIM_UI['s1']['button'].layout = Layout(width='99%')
 PARADIM_UI['s1']['button'].w = Box([PARADIM_UI['s1']['button']])
 
