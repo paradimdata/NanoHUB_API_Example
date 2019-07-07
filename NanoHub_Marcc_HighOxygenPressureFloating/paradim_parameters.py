@@ -412,13 +412,11 @@ PARADIM_UI['s2']['La3Ni2O7'] = ui.Number(description="La3Ni2O7", name="La3Ni2O7 
 PARADIM_UI['s2']['La4Ni3O10'] = ui.Number(description="La4Ni3O10", name="La4Ni3O10 ~ -1136.11", value = 0, units="Ry", step=0.1)
 PARADIM_UI['s2']['La2NiO4'] = ui.Number(description="La2NiO4", name="La2NiO4 ~ -484.42", value = 0, units="Ry", step=0.1)
 
-PARADIM_UI['s2']['DE_LaNiO3'] = ui.Number(description="Binding energy LaNiO3", name="Binding energy LaNiO3", value = 0, disabled=True, units="Ha")
-PARADIM_UI['s2']['DE_La3Ni2O7'] = ui.Number(description="Binding energy La3Ni2O7", name="Binding energy La3Ni2O7", value = 0, disabled=True, units="Ha")
-PARADIM_UI['s2']['DE_La4Ni3O10'] = ui.Number(description="Binding energy La4Ni3O10", name="Binding energy La4Ni3O10", value = 0, disabled=True, units="Ha")
-PARADIM_UI['s2']['DE_La2NiO4'] = ui.Number(description="Binding energy La2NiO4", name="Binding energy La2NiO4", value = 0, disabled=True, units="Ha")
-                 
-    
-                 
+PARADIM_UI['s2']['DE_LaNiO3'] = ui.Number(description="Binding energy LaNiO3", name="Binding energy LaNiO3", value = 0, disabled=True, units="kJ/mol-fu")
+PARADIM_UI['s2']['DE_La3Ni2O7'] = ui.Number(description="Binding energy La3Ni2O7", name="Binding energy La3Ni2O7", value = 0, disabled=True, units="kJ/mol-fu")
+PARADIM_UI['s2']['DE_La4Ni3O10'] = ui.Number(description="Binding energy La4Ni3O10", name="Binding energy La4Ni3O10", value = 0, disabled=True, units="kJ/mol-fu")
+PARADIM_UI['s2']['DE_La2NiO4'] = ui.Number(description="Binding energy La2NiO4", name="Binding energy La2NiO4", value = 0, disabled=True, units="kJ/mol-fu")
+PARADIM_UI['s2']['DE_NiO'] = ui.Number(description="Binding energy NiO", name="Binding energy NiO", value = 0, disabled=True, units="kJ/mol-fu")
                  
 PARADIM_UI['s2']['button'].on_click(lambda e: PARADIM_UI['s2']['action'].click( e ) )
 
@@ -439,6 +437,7 @@ PARADIM_UI['s2']['l1'] = HBox([
                                 PARADIM_UI['s2']['DE_La3Ni2O7'],
                                 PARADIM_UI['s2']['DE_La4Ni3O10'],
                                 PARADIM_UI['s2']['DE_La2NiO4'],
+                                PARADIM_UI['s2']['DE_NiO'],
                                 PARADIM_UI['s2']['button'].w
                             ], layout = Layout(width='100%', padding="2px"))
                         ], layout = Layout(width='100%', border='1px'))
@@ -454,7 +453,7 @@ PARADIM_UI['s2']['display'] = PARADIM_UI['s2']['l1']
 
 PARADIM_UI['s3'] = {}
 
-PARADIM_UI['s3']['button'] = Button(description='Calculate Thermodynamics')
+PARADIM_UI['s3']['button'] = Button(description='Calculate Ellingham Diagram')
 PARADIM_UI['s3']['button'].layout = Layout(width='99%')
 PARADIM_UI['s3']['button'].w = Box([PARADIM_UI['s3']['button']])
 PARADIM_UI['s3']['action'] = Myaction()
@@ -469,23 +468,3 @@ PARADIM_UI['s3']['l1'].layout = Layout(width='100%', border='1px')
 PARADIM_UI['s3']['display'] = PARADIM_UI['s3']['l1']
 
 
-
-##################################################
-# Fourth
-##################################################
-
-PARADIM_UI['s4'] = {}
-
-PARADIM_UI['s4']['button'] = Button(description='Calculate Oxygen Pressure')
-PARADIM_UI['s4']['button'].layout = Layout(width='99%')
-PARADIM_UI['s4']['button'].w = Box([PARADIM_UI['s4']['button']])
-PARADIM_UI['s4']['action'] = Myaction()
-PARADIM_UI['s4']['button'].on_click(lambda e: PARADIM_UI['s4']['action'].click( e ) )
-PARADIM_UI['s4']['output'] = Output()
-
-PARADIM_UI['s4']['l1'] = VBox([
-                               PARADIM_UI['s4']['button'].w,
-                              ])
-PARADIM_UI['s4']['l1'].layout = Layout(width='100%', border='1px')
-
-PARADIM_UI['s4']['display'] = PARADIM_UI['s4']['l1']
